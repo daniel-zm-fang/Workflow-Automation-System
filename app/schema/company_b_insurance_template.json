@@ -1,0 +1,47 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "personalInfo": {
+        "type": "object",
+        "properties": {
+            "firstName": {
+                "type": "string",
+                "minLength": 1
+            },
+            "lastName": {
+                "type": "string",
+                "minLength": 1
+            },
+            "dateOfBirth": {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+            },
+            "phoneNumber": {
+                "type": "string",
+                "pattern": "^\\+?[1-9]\\d{1,14}$"
+            },
+            "email": {
+                "type": "string",
+                "format": "email"
+            }
+        },
+        "required": ["firstName", "lastName", "dateOfBirth", "phoneNumber", "email"]
+    },
+    "insuranceInfo": {
+        "type": "object",
+        "properties": {
+            "policyNumber": {
+                "type": "string",
+                "minLength": 1
+            },
+            "policyType": {
+                "type": "string",
+                "enum": ["life", "health", "disability"]
+            }
+        },
+        "required": ["policyNumber", "policyType"]
+    }
+  },
+    "required": ["personalInfo", "insuranceInfo"]
+  }
