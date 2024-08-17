@@ -13,6 +13,6 @@ headers = {"Content-Type": "application/json"}
 
 response = requests.post(url, data=json.dumps(payload), headers=headers)
 
-print(response.status_code)
-print(response.headers)
-print(response.json())
+print(f"Status code: {response.status_code}")
+print(f"Request Headers: {response.headers}")
+print(f"Response: {json.dumps(response.json(), indent=4)}")
