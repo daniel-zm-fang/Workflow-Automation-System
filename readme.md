@@ -1,6 +1,6 @@
 # Workflow Automation System
 
-This project implements a flexible **workflow automation system**, similar to **Zapier**, with a focus on insurance application processing. It demonstrates how to build a system that can automate multi-step workflows triggered by events like receiving an email.
+This project implements a flexible **workflow automation system**, similar to **Zapier**. It demonstrates how to build a system that can automate multi-step workflows triggered by events like receiving an email.
 
 ## How It Works
 
@@ -62,3 +62,25 @@ To add new triggers or actions:
 ## Note
 
 This is an MVP demonstration. Inputs and outputs of triggers and actions are mocked.
+
+## Challenges & Next Steps
+
+- How can we make it easy for users to create workflows without technical knowledge?
+  
+   A: visual workflow builder: Create a drag-and-drop interface where users can visually connect triggers and actions. Also, offer a library of common pre-built workflows.
+
+- How do we handle long-running workflows?
+
+   A: Users should use **persistent** workflows, which is already supported. In production, we can save the state of a workflow in a database to allow recovery from failures.
+
+- How can we make the system scalable to handle thousands of workflows running concurrently?
+
+   A: Use horizontal scaling techniques with Kubernetes. each pod is a complete instance of application, capable of handling any workflow.Also use load balancers to distribute workflow executions across multiple servers. Microservice architecture is not suitable here. For example, if a critical service like trigger service goes down, all workflows can not be executed.
+
+- How do we manage and update the integrations as third-party APIs change?
+
+   A: We can maintain different versions of integrations to support both old and new API versions. Automated testing can be used to quickly identify issues when APIs change.
+
+- How do we ensure the security of user credentials for various services?
+
+   A: Use strong encryption for storing user credentials and sensitive data, both in transit and in storage. Where possible, use OAuth 2.0 instead of storing raw credentials.
