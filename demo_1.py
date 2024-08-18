@@ -1,7 +1,7 @@
 import requests
 import json
 
-url = "http://localhost:5001/api/run_workflow"
+url = "http://localhost:5001/api/extract_pdf_data_from_email_and_send_email"
 payload = {
     "imap_server": "imap.example.com",
     "smtp_server": "smtp.example.com",

@@ -39,12 +39,16 @@ This project implements a flexible **workflow automation system**, similar to **
 
 ## Usage & Examples
 
-To run a workflow, send a POST request to `/run_workflow` with the necessary configuration.
+To run a workflow, send a POST request to that workflow's endpoint with the necessary configuration.
 
-An example can be found in the `demo.py` file. To run it (make sure you execute `python run.py` first):
+Two example workflows can be found in the `demo_1.py` and `demo_2.py`:
+
+To run them (make sure you execute `python run.py` first):
 
 ```bash
-python demo.py
+python demo_1.py
+
+python demo_2.py
 ```
 
 ## Extending the System
