@@ -35,7 +35,11 @@ class BaseWorkflow(ABC):
                 }
             except Exception as e:
                 if attempt == self.max_retries - 1:
-                    return {"name": action.name, "status": "error", "error": str(e)}
+                    return {
+                        "name": action.name,
+                        "status": "error",
+                        "error": e.__repr__(),
+                    }
                 time.sleep(2**attempt)  # Exponential backoff
 
         return {"name": action.name, "status": "error", "error": "Max retries reached"}

@@ -56,8 +56,8 @@ python demo_2.py
 To add new triggers or actions:
 
 1. Create new Trigger or Action classes inheriting from `BaseTrigger` or `BaseAction`.
-2. Mix and match Triggers and Actions to create new workflows.
-3. Instantiate new workflows in the `routes.py` file.
+2. Mix and match Triggers and Actions, package them in a Workflow classto create new workflows.
+3. Instantiate new endpoints in the `routes.py` file.
 
 ## Note
 

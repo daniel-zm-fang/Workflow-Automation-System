@@ -1,16 +1,11 @@
 from .base import BaseAction
 from typing import Any
-import json
-from app.constant.constants import JSON_SCHEMA_TEMPLATES
 
 
 class ExtractPDFDataAction(BaseAction):
     def __init__(self, name: str, template_id: str):
         super().__init__(name)
         self.template_id = template_id
-        self.schema_path = JSON_SCHEMA_TEMPLATES[template_id]
-        with open(self.schema_path, "r") as schema_file:
-            self.schema = json.load(schema_file)
 
     def execute(self, data_store: dict[str, Any]) -> dict[str, Any]:
         """Mock PDF extraction

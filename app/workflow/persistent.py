@@ -37,8 +37,8 @@ class PersistentWorkflow(BaseWorkflow):
             time.sleep(self.check_interval)
 
     def _execute_workflow(self):
-        data_store = self.trigger.get_trigger_data()
-        results = {"trigger_data": data_store, "action_results": []}
+        data_store = {"trigger_data": self.trigger.get_trigger_data()}
+        results = {"trigger_data": data_store["trigger_data"], "action_results": []}
 
         for action in self.actions:
             action_result = self._run_action_with_retry(action, data_store)
@@ -47,6 +47,9 @@ class PersistentWorkflow(BaseWorkflow):
                 results["status"] = "error"
                 print(f"Workflow {self.name} encountered an error: {results}")
                 return
+            
+            # Add the action result to the data_store
+            data_store[action.name] = action_result["result"]
 
         results["status"] = "success"
         print(f"Workflow {self.name} executed successfully: {results}")

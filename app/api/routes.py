@@ -5,6 +5,7 @@ from app.trigger.scheduled_trigger import ScheduledTrigger
 from app.action.extract_pdf_data import ExtractPDFDataAction
 from app.action.send_email import SendEmailAction
 from app.action.dummy_action import DummyAction
+from app.action.validate_json import ValidateDataAction
 from app.workflow.one_off import OneOffWorkflow
 from app.workflow.persistent import PersistentWorkflow
 
@@ -24,6 +25,7 @@ def run_one_off_pdf_email_workflow():
     )
 
     extract_pdf_data = ExtractPDFDataAction("Extract PDF Data", data["company"])
+    validate_data = ValidateDataAction("Validate Extracted Data", data["company"])
     send_email = SendEmailAction(
         "Send Summary Email",
         data["smtp_server"],
@@ -34,7 +36,11 @@ def run_one_off_pdf_email_workflow():
     workflow = OneOffWorkflow(
         "One-off Insurance Application Workflow",
         email_trigger,
-        [extract_pdf_data, send_email],
+        [
+            extract_pdf_data,
+            validate_data,
+            send_email,
+        ],
     )
 
     results = workflow.run()
@@ -52,6 +58,7 @@ def start_persistent_pdf_email_workflow():
     )
 
     extract_pdf_data = ExtractPDFDataAction("Extract PDF Data", data["company"])
+    validate_data = ValidateDataAction("Validate Extracted Data", data["company"])
     send_email = SendEmailAction(
         "Send Summary Email",
         data["smtp_server"],
@@ -62,7 +69,11 @@ def start_persistent_pdf_email_workflow():
     workflow = PersistentWorkflow(
         "Persistent Insurance Application Workflow",
         email_trigger,
-        [extract_pdf_data, send_email],
+        [
+            extract_pdf_data,
+            validate_data,
+            send_email,
+        ],
         check_interval=10.0,  # Check for new emails every 10 seconds
     )
 
